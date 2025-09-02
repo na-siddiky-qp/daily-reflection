@@ -1,69 +1,30 @@
-# React + TypeScript + Vite
+# 📝 Daily Reflection
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite project for personal reflections.  
+Deployed with **GitHub Pages**.
 
-Currently, two official plugins are available:
+- **Repo**: [https://github.com/na-siddiky-qp/daily-reflection](https://github.com/na-siddiky-qp/daily-reflection)
+- **Live App**: [https://na-siddiky-qp.github.io/daily-reflection/](https://na-siddiky-qp.github.io/daily-reflection/)
+- **Copilot Instructions**: [View Doc](https://docs.google.com/document/d/14EduuGWkSmQQUM63Y9FEv2hnykXo3AbL6WoC16p-feA/edit?tab=t.rt66k2bk8jh4#heading=h.f16aklv0s9lg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Setup & Run
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# clone repo
+git clone https://github.com/na-siddiky-qp/daily-reflection.git
+cd daily-reflection
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# install dependencies
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+# run locally
+npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+# build for production
+npm run build
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# preview production build
+npm run preview
 ```
