@@ -1,20 +1,13 @@
 import type { ReactNode } from "react";
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import Toast from "../components/ui/Toast";
+import { ToastContext } from "./toast-context";
 
 interface ToastData {
   id: string;
   message: string;
   type: "success" | "error" | "info";
 }
-
-export interface ToastContextType {
-  showToast: (message: string, type: "success" | "error" | "info") => void;
-}
-
-export const ToastContext = createContext<ToastContextType | undefined>(
-  undefined
-);
 
 interface ToastProviderProps {
   children: ReactNode;
