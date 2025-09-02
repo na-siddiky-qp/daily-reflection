@@ -78,18 +78,34 @@ const AppContent = () => {
       };
 
       const updatedReflections = [newReflection, ...appState.reflections];
+
+      // Save to localStorage first
       saveReflections(updatedReflections);
 
-      setAppState((prev) => ({
-        ...prev,
-        reflections: updatedReflections,
-        todaysReflection: newReflection,
-        hasSubmittedToday: true,
-        isSubmitting: false,
-      }));
+      // Then update all state atomically
+      setAppState((prev) => {
+        const newState = {
+          ...prev,
+          reflections: updatedReflections,
+          todaysReflection: newReflection,
+          hasSubmittedToday: true,
+          isSubmitting: false,
+        };
 
-      // Show success message
-      showToast("🎉 Your reflection has been saved successfully!", "success");
+        // Debug log to track state changes
+        console.log("State updated after submission:", {
+          hasSubmittedToday: newState.hasSubmittedToday,
+          todaysReflection: newState.todaysReflection ? "exists" : "null",
+          reflectionsCount: newState.reflections.length,
+        });
+
+        return newState;
+      });
+
+      // Show success message after state is updated
+      setTimeout(() => {
+        showToast("🎉 Your reflection has been saved successfully!", "success");
+      }, 100);
     } catch (error) {
       setAppState((prev) => ({ ...prev, isSubmitting: false }));
       showToast("Failed to save your reflection. Please try again.", "error");
@@ -110,10 +126,24 @@ const AppContent = () => {
   };
 
   const renderTodayView = () => {
+    // Show loading state during submission
+    if (appState.isSubmitting) {
+      return (
+        <div className="flex justify-center items-center min-h-[400px]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Saving your reflection...</p>
+          </div>
+        </div>
+      );
+    }
+
+    // Show success view if today's reflection exists
     if (appState.hasSubmittedToday && appState.todaysReflection) {
       return <TodayComplete reflection={appState.todaysReflection} />;
     }
 
+    // Show form for new reflection
     return (
       <ReflectionForm
         onSubmit={handleSubmitReflection}

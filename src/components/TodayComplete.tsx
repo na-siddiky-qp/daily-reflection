@@ -33,6 +33,17 @@ const REFLECTION_SECTIONS = [
 ];
 
 const TodayComplete: React.FC<TodayCompleteProps> = ({ reflection }) => {
+  // Validation to prevent rendering issues
+  if (!reflection || !reflection.date) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="text-center">
+          <p className="text-gray-600">Loading your reflection...</p>
+        </div>
+      </div>
+    );
+  }
+
   const encouragementMessages = [
     "Great job on maintaining your reflection habit! 🎯",
     "You're building mindfulness one day at a time! 🧘‍♀️",
